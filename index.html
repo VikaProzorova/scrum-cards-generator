@@ -4,6 +4,7 @@
     <title>Scrum cards</title>
     <link rel="stylesheet" type="text/css" href="static/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <script type="text/javascript" src='static/js/3d-party/jquery.js'></script>
     <script type="text/javascript" src='static/js/3d-party/handlebars.js'></script>
@@ -38,13 +39,14 @@
                     {{#each this}}
                     <td>
                         <div class='card {{lc tracker.name}}'>
-                            <div class='title'> <span class='tracker'>{{tracker.name}} </span> #{{id}}  {{#if assigned_to.name}}({{assigned_to.name}}) {{/if}}</div>
-                            <div class='body'>
-                                <div class='description'>
-                                    {{subject}}
-                                </div>
 
-                                <br />
+                            <div class='title'> <span class='tracker'>{{tracker.name}} </span> #{{id}}
+                                <div class='assigned'> {{#if assigned_to.name}}{{assigned_to.name}} {{/if}} </div>
+                            </div>
+
+                            <div class='body'>
+
+                                <div class='description'> {{subject}} </div> <br />
 
                                 {{#if children}}
                                     <div>
@@ -63,14 +65,27 @@
                                         #{{parent.id}} - {{parent.subject}}
                                     </div>
                                 {{/if}}
+                                <br />
 
+                                {{#if due_date}}
+                                    <span> Deadline: {{due_date}} </span>
+                                {{/if}}
+
+                            </div>
+
+                            <div class='time'>
+                                <span>
+                                    {{#if estimated_hours}} {{estimated_hours}}h, {{/if}}
+                                    {{#if priority}} {{priority.name}} {{/if}}
+                                </span>
                             </div>
 
                             <div class='footer'>
                                 <span>
-                                    {{category.name}}
+                                    {{project.name}}
                                 </span>
                             </div>
+
                         </div>
                     </td>
                     {{/each}}
